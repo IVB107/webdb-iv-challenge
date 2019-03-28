@@ -15,9 +15,10 @@ module.exports = {
       directory: './data/seeds'
     },
     pool: {
-      min: 2,
-      max: 10
-    },
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done); // Enforce FK's in DB
+      }
+    }
   }
 
 };
